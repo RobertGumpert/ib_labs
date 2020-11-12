@@ -129,34 +129,6 @@ func rewriteFile(rewriteFileName string, content []byte) error {
 	return nil
 }
 
-//func desDecrypt(cipherText []byte) ([]byte, error) {
-//	block, err := des.NewCipher(key)
-//	if err != nil {
-//		return nil, err
-//	}
-//	blockMode := cipher.NewOFB(block, iv)
-//	origData := make([]byte, len(cipherText))
-//	blockMode.XORKeyStream(origData, cipherText)
-//	length := len(origData)
-//	unpadding := int(origData[length-1])
-//	origData = origData[:(length - unpadding)]
-//	return origData, nil
-//}
-//
-//func desEncrypt(plainText []byte) ([]byte, error) {
-//	block, err := des.NewCipher(key)
-//	if err != nil {
-//		return nil, err
-//	}
-//	blockSize := block.BlockSize()
-//	padding := blockSize - len(plainText)%blockSize
-//	padtext := bytes.Repeat([]byte{byte(padding)}, padding)
-//	origData := append(plainText, padtext...)
-//	blockMode := cipher.NewOFB(block, iv)
-//	crypted := make([]byte, len(origData))
-//	blockMode.XORKeyStream(crypted, origData)
-//	return crypted, nil
-//}
 
 func desEncrypt(plainText []byte) ([]byte, error){
 	block, err := des.NewCipher(key)
