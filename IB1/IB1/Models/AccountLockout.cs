@@ -8,7 +8,7 @@ namespace IB1.Models
 {
     public enum AccountLockout: int
     {
-        OK = 0,
-        Lockout = -1
+        OK = 0,      // Не заблокирован
+        Lockout = -1 // Заблокирован
     }
 }

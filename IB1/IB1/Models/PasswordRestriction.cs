@@ -8,7 +8,7 @@ namespace IB1.Models
 {
     public enum PasswordRestriction : int
     {
-        MustBe = 20,
-        ShouldNot = -20
+        MustBe = 20,     // Установленные ограничения на пароль 
+        ShouldNot = -20  // Не установленные ограничения на пароль 
     }
 }

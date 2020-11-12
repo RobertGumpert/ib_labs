@@ -74,7 +74,13 @@ namespace IB1
                     }
                     catch (Exception)
                     {
-                        Environment.Exit(0);
+                        var dialog = new DialogContinueExit();
+                        dialog.LabelMessageValue = "Вы истратили 3 попытки входа в приложение";
+                        if (dialog.ShowDialog() == DialogResult.No)
+                        {
+                            Environment.Exit(0);
+                        }
+                        return;
                     }
                     var main = new FormMain();
                     main.AccessService = accessService;

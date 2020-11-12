@@ -1,7 +1,6 @@
 package main
 
 import (
-
 	"crypto/cipher"
 	"crypto/des"
 	"fmt"
@@ -70,14 +69,18 @@ func main() {
 }
 
 func WriteEncryptContent(userFile, tempFile string) error {
+	// Чтение расшифрованных данных из
+	// временного файла.
 	tempFileContent, err := onlyReadFile(tempFile)
 	if err != nil {
 		return err
 	}
+	// Шифрование данных.
 	crypted, err := desEncrypt(tempFileContent)
 	if err != nil {
 		return err
 	}
+	// Перезапись файла с новыми зашифрованными данными.
 	err = rewriteFile(userFile, crypted)
 	if err != nil {
 		return err
@@ -86,14 +89,17 @@ func WriteEncryptContent(userFile, tempFile string) error {
 }
 
 func ReadDecryptContent(userFile, tempFile string) error {
+	// Читаем зашифрованные данные из основного файла.
 	crypted, err := onlyReadFile(userFile)
 	if err != nil {
 		return err
 	}
+	// Расшифровываем данные
 	decrypted, err := desDecrypt(crypted)
 	if err != nil {
 		return err
 	}
+	// Пишем расшифрованные данные во временный файл
 	err = writeFile(tempFile, decrypted)
 	if err != nil {
 		return err
@@ -118,10 +124,13 @@ func writeFile(fileName string, content []byte) error {
 }
 
 func rewriteFile(rewriteFileName string, content []byte) error {
+	// Удаляем основной файл
 	err := os.Remove(rewriteFileName)
 	if err != nil {
 		return err
 	}
+	// Создаём новый основной файл, открываем,
+	// записываем зашифрованные данные.
 	err = writeFile(rewriteFileName, content)
 	if err != nil {
 		return err
@@ -131,23 +140,29 @@ func rewriteFile(rewriteFileName string, content []byte) error {
 
 
 func desEncrypt(plainText []byte) ([]byte, error){
+	// Создаем объект алгоритма DES
 	block, err := des.NewCipher(key)
 	if err != nil {
 		return nil, err
 	}
 	ciphertext := make([]byte, des.BlockSize+len(plainText))
+	// Устанавливаем режим OFB
 	stream := cipher.NewOFB(block, iv)
+	// Выполняем шифрование
 	stream.XORKeyStream(ciphertext[des.BlockSize:], plainText)
 	return ciphertext, nil
 }
 
 func desDecrypt(cipherText []byte) ([]byte, error) {
+	// Создаем объект алгоритма DES
 	block, err := des.NewCipher(key)
 	if err != nil {
 		return nil, err
 	}
 	plaintext := make([]byte, len(cipherText))
+	// Устанавливаем режим OFB
 	stream := cipher.NewOFB(block, iv)
+	// Выполняем расшифрование
 	stream.XORKeyStream(plaintext, cipherText[des.BlockSize:])
 	return plaintext, nil
 }
