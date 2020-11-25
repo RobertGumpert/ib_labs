@@ -1,3 +1,6 @@
+import base64
+import binascii
+import codecs
 import json
 import sys
 
@@ -324,17 +327,22 @@ def hash_sum(blocks, create_report):
 
 
 # os.args
-#   report -t
-#   report -f
+#   report -t file
+#   report -f file
 #
 def main():
     args = sys.argv
     create_report = False
+    file_name = args[3]
     file_content = ""
     if args[2] == '-t':
         create_report = True
-    with open('file.txt', 'r') as f:
-        file_content = f.read()
+    with open(file_name, "rb") as f:
+        byte = f.read()
+        hex_file_represent = byte.hex()
+        file_content = ''.join(
+            [chr(int(''.join(c), 16)) for c in zip(hex_file_represent[0::2], hex_file_represent[1::2])])
+        #
     blocks = init_sha(file_content)
     hash_file_content = hash_sum(blocks, create_report)
     print(hash_file_content)

@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace IB2
 {
-    public partial class Form1 : Form
+    public partial class DialogReference : Form
     {
-        public Form1()
+        public DialogReference()
         {
             InitializeComponent();
+        }
+
+        private void buttonOk_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
         }
     }
 }
