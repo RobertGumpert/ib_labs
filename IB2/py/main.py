@@ -1,3 +1,8 @@
+import json
+
+json_report = dict()
+
+
 # Циклический сдвиг отличается от линейного тем,
 # биты с одного конца перемещаются на место место битов на другом конце,
 # то есть движутся по кольцу.
@@ -131,7 +136,7 @@ def init_sha(message):
     return blocks
 
 
-def hash_sum(blocks):
+def hash_sum(blocks, create_report):
     #
     # Инициализируем пять 32 битных буфера,
     # с "константными" значениями (на этапе инициализации),
@@ -147,6 +152,7 @@ def hash_sum(blocks):
     # Для каждого 512 битового блока,
     # выполняем преобразование буфферов.
     #
+    json_list_blocks = list()
     for block in blocks:
         #
         # Для каждого 512 битового блока,
@@ -187,8 +193,20 @@ def hash_sum(blocks):
         temp_buffer_d = buffer_d
         temp_buffer_e = buffer_e
         #
+        json_block = dict()
+        if create_report is True:
+            json_block["w_i"] = ['{0:032b}'.format(int(x)) for x in w.copy()]
+            json_block["block_value"] = block
+            json_block["m_i"] = ['{0:032b}'.format(int(x)) for x in bit_words.copy()]
+            json_block["temp_buffer"] = [{"a": '{0:032b}'.format(temp_buffer_a)},
+                                         {"b": '{0:032b}'.format(temp_buffer_b)},
+                                         {"c": '{0:032b}'.format(temp_buffer_c)},
+                                         {"d": '{0:032b}'.format(temp_buffer_d)},
+                                         {"e": '{0:032b}'.format(temp_buffer_e)}]
+        #
         # Главный цикл алгоритма с 80 раундами
         #
+        json_list_rounds = list()
         for round_index in range(0, 80):
             #
             # Для каждого раунда алгоритма, выделяется нелинейная функция,
@@ -241,7 +259,8 @@ def hash_sum(blocks):
             #
             # tmp = (a <<< 5) + f_t(b,c,d) + e + w_t + k_t
             #
-            temp = circle_left_shift(temp_buffer_a, 5, False) + result_function + temp_buffer_e + k + w[round_index] & 0xffffffff
+            temp = circle_left_shift(temp_buffer_a, 5, False) + result_function + temp_buffer_e + k + w[
+                round_index] & 0xffffffff
             #
             # e <- d
             #
@@ -263,6 +282,18 @@ def hash_sum(blocks):
             #
             temp_buffer_a = temp
             #
+            json_round = dict()
+            if create_report is True:
+                json_round["round_index"] = round_index
+                json_round["f"] = '{0:032b}'.format(result_function)
+                json_round["k"] = '{0:032b}'.format(k)
+                json_round["change_temp_buffer"] = [{"a": '{0:032b}'.format(temp_buffer_a)},
+                                                    {"b": '{0:032b}'.format(temp_buffer_b)},
+                                                    {"c": '{0:032b}'.format(temp_buffer_c)},
+                                                    {"d": '{0:032b}'.format(temp_buffer_d)},
+                                                    {"e": '{0:032b}'.format(temp_buffer_e)}]
+                json_list_rounds.append(json_round)
+
         #
         # После преобразования временных буффером
         # в цикле по каждому 512 блоку, выходные буфферы,
@@ -274,6 +305,18 @@ def hash_sum(blocks):
         buffer_c = buffer_c + temp_buffer_c & 0xffffffff
         buffer_d = buffer_d + temp_buffer_d & 0xffffffff
         buffer_e = buffer_e + temp_buffer_e & 0xffffffff
+        #
+        if create_report is True:
+            json_block["rounds"] = json_list_rounds
+            json_block["origin_buffer"] = [{"a": '{0:032b}'.format(buffer_a)},
+                                           {"b": '{0:032b}'.format(buffer_b)},
+                                           {"c": '{0:032b}'.format(buffer_c)},
+                                           {"d": '{0:032b}'.format(buffer_d)},
+                                           {"e": '{0:032b}'.format(buffer_e)}]
+            json_list_blocks.append(json_block)
+    #
+    if create_report is True:
+        json_report["blocks"] = json_list_blocks
     #
     # Дайжест сообщения.
     #
@@ -282,7 +325,11 @@ def hash_sum(blocks):
 
 def main():
     blocks = init_sha("Hello world")
-    digest = hash_sum(blocks)
+    create_report = False
+    digest = hash_sum(blocks, create_report)
+    if create_report is True:
+        with open('result.json', 'w') as f:
+            json.dump(json_report, f)
     print(digest)
 
 
