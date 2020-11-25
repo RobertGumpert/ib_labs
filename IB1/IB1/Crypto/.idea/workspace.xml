@@ -2,21 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b89ecb4c-67a8-4485-95eb-e9e0ccf37da7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.vs/IB1/v15/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/IB1/v15/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FormAuthorized.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../FormAuthorized.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Models/AccountLockout.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Models/AccountLockout.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Models/PasswordRestriction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Models/PasswordRestriction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bin/Debug/IB1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/Debug/IB1.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bin/Debug/IB1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/Debug/IB1.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../obj/Debug/IB1.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../obj/Debug/IB1.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../obj/Debug/IB1.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../obj/Debug/IB1.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../obj/Debug/IB1.csproj.GenerateResource.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../obj/Debug/IB1.csproj.GenerateResource.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../obj/Debug/IB1.csprojResolveAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../obj/Debug/IB1.csprojResolveAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../obj/Debug/IB1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../obj/Debug/IB1.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../obj/Debug/IB1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../obj/Debug/IB1.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Report/~$знецов В.И. ПИбд-41 лаб. 1.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Report/~WRL2621.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Report/Кузнецов В.И. ПИбд-41 лаб. 1.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Report/Кузнецов В.И. ПИбд-41 лаб. 1.docx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +22,9 @@
   <component name="GOROOT" path="C:\Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
   </component>
   <component name="ProjectId" id="1k5kf1ZXH9ljT5wEKOFEtKKWcDx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -77,7 +68,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
