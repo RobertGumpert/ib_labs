@@ -1,4 +1,5 @@
 import json
+import sys
 
 json_report = dict()
 
@@ -195,9 +196,8 @@ def hash_sum(blocks, create_report):
         #
         json_block = dict()
         if create_report is True:
-            json_block["w_i"] = ['{0:032b}'.format(int(x)) for x in w.copy()]
             json_block["block_value"] = block
-            json_block["m_i"] = ['{0:032b}'.format(int(x)) for x in bit_words.copy()]
+            json_block["w_i"] = ['{0:032b}'.format(int(x)) for x in w.copy()]
             json_block["temp_buffer"] = [{"a": '{0:032b}'.format(temp_buffer_a)},
                                          {"b": '{0:032b}'.format(temp_buffer_b)},
                                          {"c": '{0:032b}'.format(temp_buffer_c)},
@@ -323,14 +323,24 @@ def hash_sum(blocks, create_report):
     return '%08x%08x%08x%08x%08x' % (buffer_a, buffer_b, buffer_c, buffer_d, buffer_e)
 
 
+# os.args
+#   report -t
+#   report -f
+#
 def main():
-    blocks = init_sha("Hello world")
+    args = sys.argv
     create_report = False
-    digest = hash_sum(blocks, create_report)
+    file_content = ""
+    if args[2] == '-t':
+        create_report = True
+    with open('file.txt', 'r') as f:
+        file_content = f.read()
+    blocks = init_sha(file_content)
+    hash_file_content = hash_sum(blocks, create_report)
+    print(hash_file_content)
     if create_report is True:
         with open('result.json', 'w') as f:
             json.dump(json_report, f)
-    print(digest)
 
 
 if __name__ == '__main__':
